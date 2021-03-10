@@ -13,6 +13,7 @@ add_filter( 'woocommerce_admin_status_tabs', function ( array $tabs ) {
 ```
 2. Enable the new navigation.
 3. Make sure the menu item for the registered tab is shown under `Tools`.
+
 ### Remove mobile activity panel toggle #6539
 
 1. Narrow your viewport to < 782px.
@@ -356,6 +357,12 @@ wp db query 'SELECT status FROM wp_wc_admin_notes WHERE name = "wc-admin-add-fir
 2. Go to `Analytics` > `Orders`
 3. Set the `Date Range` filter in order to cover the refunded order date.
 4. Verify that now the associated order number and the related products are visible.
+### Add gross sales column to CSV export #6567
+
+1. Create more than 25 revenues
+2. Go to Analytics -> Revenue -> Click "Download"
+3. Click the download link in the email
+4. See gross sales column
 
 ### Remove CES actions for adding and editing a product and editing an order #6355
 
