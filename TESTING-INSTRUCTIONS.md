@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Delete customer data on network user deletion #6574
+
+1. Set up a multisite network.
+2. Create a new user.
+3. Make an order with that user.
+4. Note the customer data under WooCommerce -> Customers.
+5. Navigate to Network -> All users `/wp-admin/network/users.php`.
+6. Delete that user.
+7. Wait for the scheduled action to finish or manually run the `wc-admin_delete_user_customers` action under Tools -> Scheduled Actions.
+8. Navigate to WooCommerce -> Customers.
+9. Make sure that customer data has been deleted.
 ### Fix hidden menu title on smaller screens #6562
 
 1. Enable the new navigation.
