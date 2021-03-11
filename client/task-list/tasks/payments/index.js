@@ -412,6 +412,7 @@ export default compose(
 			'woocommerce_razorpay_settings',
 			'woocommerce_mollie_payments_settings',
 			'woocommerce_payubiz_settings',
+			'woocommerce_mercadopago_settings',
 		];
 
 		const options = optionNames.reduce( ( result, name ) => {
