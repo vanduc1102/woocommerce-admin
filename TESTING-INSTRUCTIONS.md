@@ -359,10 +359,11 @@ wp db query 'SELECT status FROM wp_wc_admin_notes WHERE name = "wc-admin-add-fir
 4. Verify that now the associated order number and the related products are visible.
 ### Add gross sales column to CSV export #6567
 
-1. Create more than 25 revenues
-2. Go to Analytics -> Revenue -> Click "Download"
-3. Click the download link in the email
-4. See gross sales column
+1. Navigate to Analytics -> Revenue
+2. Adjust the date filter so that more than 25 rows are visible
+4. Click "Download"
+5. Click the download link in the email
+6. See gross sales column
 
 ### Remove CES actions for adding and editing a product and editing an order #6355
 
