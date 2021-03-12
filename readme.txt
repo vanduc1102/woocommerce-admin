@@ -108,6 +108,7 @@ Release and roadmap notes are available on the [WooCommerce Developers Blog](htt
 - Feature: Increase target audience for business feature step. #6508
 - Dev: Store profiler - Added MailPoet to Business Details step  #6503
 - Dev: Add tilde (~) to represent client root directory for imports. #6517
+- Dev: Payments task: include Mercado Pago #6572
 
 == 2.1.0 3/10/2021  ==
 
