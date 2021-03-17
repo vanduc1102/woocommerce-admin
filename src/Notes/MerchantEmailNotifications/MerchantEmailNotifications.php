@@ -30,6 +30,7 @@ class MerchantEmailNotifications {
 		if (
 			! isset( $_GET['external_redirect'] ) ||
 			1 !== intval( $_GET['external_redirect'] ) ||
+			! isset( $_GET['user'] ) ||
 			! isset( $_GET['note'] ) ||
 			! isset( $_GET['action'] )
 		) {
@@ -37,6 +38,7 @@ class MerchantEmailNotifications {
 		}
 		$note_id   = intval( $_GET['note'] );
 		$action_id = intval( $_GET['action'] );
+		$user_id   = intval( $_GET['user'] );
 		/* phpcs:enable */
 
 		$note = Notes::get_note( $note_id );
@@ -51,7 +53,10 @@ class MerchantEmailNotifications {
 			return;
 		}
 
+		// We need to set the current user for tracking reasons. And unset user after tracking.
+		wp_set_current_user( $user_id );
 		Notes::trigger_note_action( $note, $triggered_action );
+		wp_set_current_user( 0 );
 
 		$url = $triggered_action->query;
 
@@ -82,7 +87,6 @@ class MerchantEmailNotifications {
 				self::send_merchant_notification( $note );
 				$note->set_status( 'sent' );
 				$note->save();
-				wc_admin_record_tracks_event( 'wcadmin_email_note_sent', array( 'note_name' => $note->get_name() ) );
 			}
 		}
 	}
@@ -94,29 +98,29 @@ class MerchantEmailNotifications {
 	 */
 	public static function send_merchant_notification( $note ) {
 		\WC_Emails::instance();
-		$users_emails = self::get_notification_email_addresses( $note );
+		$users        = self::get_users_to_notify( $note );
 		$email        = new NotificationEmail( $note );
-		foreach ( $users_emails as $user_email ) {
-			if ( is_email( $user_email ) ) {
-				$email->trigger( $user_email );
+		$current_user = wp_get_current_user();
+		foreach ( $users as $user ) {
+			if ( is_email( $user->user_email ) ) {
+				$email->trigger( $user->user_email, $user->ID );
 			}
 		}
 	}
 
 	/**
-	 * Get email addresses by role to notify.
+	 * Get users to notify.
 	 *
 	 * @param object $note The note to send.
-	 * @return array Emails to notify
+	 * @return array Users to notify
 	 */
-	public static function get_notification_email_addresses( $note ) {
+	public static function get_users_to_notify( $note ) {
 		$content_data = $note->get_content_data();
 		$role         = 'administrator';
 		if ( isset( $content_data->role ) ) {
 			$role = $content_data->role;
 		}
-		$args  = array( 'role' => $role );
-		$users = get_users( $args );
-		return array_column( $users, 'user_email' );
+		$args = array( 'role' => $role );
+		return get_users( $args );
 	}
 }

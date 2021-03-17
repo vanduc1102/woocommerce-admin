@@ -123,7 +123,7 @@ class WC_Tests_Email_Notes extends WC_Unit_Test_Case {
 		$note->set_content_data( (object) $content_data );
 		$notification_email = new NotificationEmail( $note );
 
-		$this->assertEmpty( MerchantEmailNotifications::get_notification_email_addresses( $note ) );
+		$this->assertEmpty( MerchantEmailNotifications::get_users_to_notify( $note ) );
 		$this->assertEmpty( $notification_email->get_template_filename( 'wrong_type' ) );
 	}
 }
