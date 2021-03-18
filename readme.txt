@@ -124,10 +124,12 @@ Release and roadmap notes are available on the [WooCommerce Developers Blog](htt
 - Add: CES survey for search product, order, customer #6420
 - Add: CES survey for importing products #6419
 - Add: CES survey for adding product categories, tags, and attributes #6418
+- Add: Additional analytics tracking for the business details step. #6575
 - Add: Include tracking for mail poet installs in the selective bundle install #6603
 - Dev: Add script automation for gathering hooks and filters. #6454
 - Fix: Correct a bug where the JP connection flow would not happen when installing JP in the OBW. #6521
 - Dev: Add TypeScript and page objects to the E2E test suite. #6582
+- Dev: Introduce Typescript to Navigation utils #6477
 - Fix: Improve AddFirstProduct email note contents. #6617
 
 == 2.1.3 3/14/2021  ==
